@@ -37,6 +37,7 @@ function Navigation() {
     { name: 'Home', href: '#hero' },
     { name: 'Attractions', href: '#featured' },
     { name: 'Guides', href: '#guides' },
+    { name: 'Blog', href: '/blog' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#footer' },
   ]
