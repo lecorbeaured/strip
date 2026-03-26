@@ -244,6 +244,7 @@ function FeaturedExperiences() {
       description: 'See Vegas from the sky with breathtaking aerial views.',
       image: '/helicopter-night.jpg',
       price: 'From $89',
+      affiliateLink: 'https://www.viator.com/tours/Las-Vegas/Las-Vegas-Strip-Night-Flight-by-Helicopter-with-Transport/d684-5847NIGHT?pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Big Apple Coaster',
@@ -299,10 +300,17 @@ function FeaturedExperiences() {
                 <p className="text-vegas-text-gray text-sm mb-4">
                   {exp.description}
                 </p>
-                <button className="btn-outline w-full text-sm flex items-center justify-center gap-2 group/btn">
-                  View Tickets
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </button>
+                {exp.affiliateLink ? (
+                  <a href={exp.affiliateLink} target="_blank" rel="noopener noreferrer" className="btn-outline w-full text-sm flex items-center justify-center gap-2 group/btn">
+                    Book Now
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  </a>
+                ) : (
+                  <button className="btn-outline w-full text-sm flex items-center justify-center gap-2 group/btn">
+                    View Tickets
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -838,7 +846,7 @@ function Footer() {
     { name: 'High Roller', href: '#' },
     { name: 'Bellagio Fountains', href: '#' },
     { name: 'Eiffel Tower', href: '#' },
-    { name: 'The Sphere', href: '#' },
+    { name: 'The Sphere', href: 'https://www.getyourguide.com/las-vegas-l58/las-vegas-the-sphere-experience-the-wizard-of-oz-t969545/?partner_id=PHIGTBO&utm_medium=online_publisher' },
   ]
 
   const support = [
@@ -986,6 +994,22 @@ function App() {
         <TravelGuides />
         <FAQSection />
       </main>
+      {/* Hotel Booking Widget */}
+      <section id="hotels" className="py-20 bg-vegas-black">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl text-white mb-4">
+            Find Your <span className="text-vegas-gold">Vegas Hotel</span>
+          </h2>
+          <p className="text-white/60 mb-8">Compare rates and book the perfect hotel for your Vegas trip.</p>
+          <iframe
+            src="https://getyourguide.stay22.com/ebss/71RKgpvzrx"
+            width="100%"
+            height="500"
+            style={{ border: 'none', borderRadius: '12px' }}
+            title="Book Hotels in Las Vegas"
+          />
+        </div>
+      </section>
       <Footer />
     </div>
   )
