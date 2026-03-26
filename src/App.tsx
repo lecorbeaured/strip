@@ -1029,7 +1029,7 @@ function Footer() {
       <div className="py-6 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-vegas-text-gray text-sm">
-            © 2025 VegasStripGuide.com. All rights reserved.
+            © {new Date().getFullYear()} VegasStripGuide.com. All rights reserved.
           </p>
           <p className="text-vegas-text-gray text-sm">
             This site contains affiliate links. We may earn a commission at no extra cost to you.

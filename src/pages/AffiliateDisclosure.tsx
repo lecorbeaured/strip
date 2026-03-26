@@ -47,7 +47,7 @@ export default function AffiliateDisclosure() {
       </main>
 
       <footer className="border-t border-white/10 py-6 text-center text-vegas-text-gray text-sm">
-        © 2025 VegasStripGuide.com · <Link to="/privacy" className="hover:text-vegas-gold">Privacy</Link> · <Link to="/terms" className="hover:text-vegas-gold">Terms</Link> · <Link to="/affiliate-disclosure" className="hover:text-vegas-gold">Affiliate Disclosure</Link>
+        © {new Date().getFullYear()} VegasStripGuide.com · <Link to="/privacy" className="hover:text-vegas-gold">Privacy</Link> · <Link to="/terms" className="hover:text-vegas-gold">Terms</Link> · <Link to="/affiliate-disclosure" className="hover:text-vegas-gold">Affiliate Disclosure</Link>
       </footer>
     </div>
   )
