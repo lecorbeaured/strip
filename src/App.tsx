@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './App.css'
 import { 
   ChevronRight, 
@@ -875,17 +876,37 @@ function Footer() {
   ]
 
   const attractions = [
-    { name: 'High Roller', href: '#' },
-    { name: 'Bellagio Fountains', href: '#' },
-    { name: 'Eiffel Tower', href: '#' },
-    { name: 'The Sphere', href: 'https://www.getyourguide.com/las-vegas-l58/las-vegas-the-sphere-experience-the-wizard-of-oz-t969545/?partner_id=PHIGTBO&utm_medium=online_publisher' },
+    { name: 'High Roller', href: 'https://www.viator.com/searchResults/all?text=High+Roller+Las+Vegas&pid=P00292126&mcid=42383&medium=link', external: true },
+    { name: 'Bellagio Fountains', href: 'https://www.viator.com/searchResults/all?text=Bellagio+Fountains+Las+Vegas&pid=P00292126&mcid=42383&medium=link', external: true },
+    { name: 'Eiffel Tower', href: 'https://www.viator.com/searchResults/all?text=Eiffel+Tower+Viewing+Deck+Las+Vegas&pid=P00292126&mcid=42383&medium=link', external: true },
+    { name: 'The Sphere', href: 'https://www.getyourguide.com/las-vegas-l58/las-vegas-the-sphere-experience-the-wizard-of-oz-t969545/?partner_id=PHIGTBO&utm_medium=online_publisher', external: true },
+    { name: 'Helicopter Night Flight', href: 'https://www.viator.com/tours/Las-Vegas/Las-Vegas-Strip-Night-Flight-by-Helicopter-with-Transport/d684-5847NIGHT?pid=P00292126&mcid=42383&medium=link', external: true },
+    { name: 'FlyOver Las Vegas', href: 'https://www.viator.com/searchResults/all?text=FlyOver+Las+Vegas&pid=P00292126&mcid=42383&medium=link', external: true },
   ]
 
+  const [contactOpen, setContactOpen] = useState(false)
+  const [contactName, setContactName] = useState('')
+  const [contactEmail, setContactEmail] = useState('')
+  const [contactMessage, setContactMessage] = useState('')
+  const [contactSent, setContactSent] = useState(false)
+
+  const handleContact = (e: React.FormEvent) => {
+    e.preventDefault()
+    setContactSent(true)
+    setTimeout(() => {
+      setContactOpen(false)
+      setContactSent(false)
+      setContactName('')
+      setContactEmail('')
+      setContactMessage('')
+    }, 2500)
+  }
+
   const support = [
-    { name: 'Contact Us', href: '#' },
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Affiliate Disclosure', href: '#' },
+    { name: 'Contact Us', href: '#', isContact: true },
+    { name: 'Privacy Policy', href: '/privacy', isContact: false },
+    { name: 'Terms of Service', href: '/terms', isContact: false },
+    { name: 'Affiliate Disclosure', href: '/affiliate-disclosure', isContact: false },
   ]
 
   return (
@@ -973,7 +994,7 @@ function Footer() {
               <ul className="space-y-3">
                 {attractions.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-vegas-text-gray hover:text-vegas-gold transition-colors">
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-vegas-text-gray hover:text-vegas-gold transition-colors">
                       {link.name}
                     </a>
                   </li>
@@ -987,9 +1008,15 @@ function Footer() {
               <ul className="space-y-3">
                 {support.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-vegas-text-gray hover:text-vegas-gold transition-colors">
-                      {link.name}
-                    </a>
+                    {link.isContact ? (
+                      <button onClick={() => setContactOpen(true)} className="text-vegas-text-gray hover:text-vegas-gold transition-colors text-left">
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link to={link.href} className="text-vegas-text-gray hover:text-vegas-gold transition-colors">
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -1009,6 +1036,72 @@ function Footer() {
           </p>
         </div>
       </div>
+
+      {/* Contact Us Modal */}
+      {contactOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={() => setContactOpen(false)}>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+          <div
+            className="relative bg-vegas-charcoal border border-white/10 rounded-2xl p-8 w-full max-w-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setContactOpen(false)}
+              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <h3 className="font-display text-2xl font-bold text-white mb-1">Contact Us</h3>
+            <p className="text-vegas-text-gray text-sm mb-6">We'll get back to you within 24 hours.</p>
+            {contactSent ? (
+              <div className="flex flex-col items-center gap-3 py-8 text-green-400">
+                <Check className="w-10 h-10" />
+                <p className="text-lg font-medium">Message sent! We'll be in touch.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleContact} className="space-y-4">
+                <div>
+                  <label className="block text-sm text-white/70 mb-1">Name</label>
+                  <input
+                    type="text"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder="Your name"
+                    required
+                    className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded text-white placeholder:text-gray-500 focus:outline-none focus:border-vegas-gold transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-white/70 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    required
+                    className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded text-white placeholder:text-gray-500 focus:outline-none focus:border-vegas-gold transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-white/70 mb-1">Message</label>
+                  <textarea
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    placeholder="How can we help?"
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded text-white placeholder:text-gray-500 focus:outline-none focus:border-vegas-gold transition-colors resize-none"
+                  />
+                </div>
+                <button type="submit" className="btn-gold w-full flex items-center justify-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  Send Message
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </footer>
   )
 }
