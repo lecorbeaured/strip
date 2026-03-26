@@ -226,18 +226,21 @@ function FeaturedExperiences() {
       description: 'Soar 550 feet above the Strip in the world\'s tallest observation wheel.',
       image: '/high-roller.jpg',
       price: 'From $29',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=High+Roller+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Eiffel Tower Viewing Deck',
       description: 'Romantic views from 46 stories up at Paris Las Vegas.',
       image: '/eiffel-tower.jpg',
       price: 'From $25',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Eiffel+Tower+Viewing+Deck+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'FlyOver Las Vegas',
       description: 'Immersive flight experience over iconic landscapes.',
       image: '/flyover.jpg',
       price: 'From $32',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=FlyOver+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Helicopter Night Flight',
@@ -251,6 +254,7 @@ function FeaturedExperiences() {
       description: 'Thrill ride through the NYC skyline at New York-New York.',
       image: '/big-apple-coaster.jpg',
       price: 'From $19',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Big+Apple+Coaster+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
   ]
 
@@ -350,6 +354,7 @@ function AttractionsGuide() {
       image: '/bellagio-fountains.jpg',
       price: 'Free',
       location: 'Bellagio Hotel',
+      affiliateLink: '',
     },
     {
       name: 'High Roller',
@@ -357,6 +362,7 @@ function AttractionsGuide() {
       image: '/high-roller.jpg',
       price: 'From $29',
       location: 'The LINQ',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=High+Roller+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'Eiffel Tower Viewing Deck',
@@ -364,6 +370,7 @@ function AttractionsGuide() {
       image: '/eiffel-tower.jpg',
       price: 'From $25',
       location: 'Paris Las Vegas',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Eiffel+Tower+Viewing+Deck+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'FlyOver Las Vegas',
@@ -371,6 +378,7 @@ function AttractionsGuide() {
       image: '/flyover.jpg',
       price: 'From $32',
       location: 'Strip Center',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=FlyOver+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'Big Apple Coaster',
@@ -378,6 +386,7 @@ function AttractionsGuide() {
       image: '/big-apple-coaster.jpg',
       price: 'From $19',
       location: 'New York-New York',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Big+Apple+Coaster+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'STRAT Tower',
@@ -385,6 +394,7 @@ function AttractionsGuide() {
       image: '/strat-tower.jpg',
       price: 'From $20',
       location: 'The STRAT',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=STRAT+Tower+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'Madame Tussauds',
@@ -392,6 +402,7 @@ function AttractionsGuide() {
       image: '/madame-tussauds.jpg',
       price: 'From $37',
       location: 'The Venetian',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Madame+Tussauds+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'Shark Reef Aquarium',
@@ -399,6 +410,7 @@ function AttractionsGuide() {
       image: '/shark-reef.jpg',
       price: 'From $29',
       location: 'Mandalay Bay',
+      affiliateLink: 'https://www.viator.com/searchResults/all?text=Shark+Reef+Aquarium+Las+Vegas&pid=P00292126&mcid=42383&medium=link',
     },
     {
       name: 'The Sphere',
@@ -406,6 +418,7 @@ function AttractionsGuide() {
       image: '/the-sphere.jpg',
       price: 'From $79',
       location: 'The Sphere',
+      affiliateLink: 'https://www.getyourguide.com/las-vegas-l58/las-vegas-the-sphere-experience-the-wizard-of-oz-t969545/?partner_id=PHIGTBO&utm_medium=online_publisher',
     },
   ]
 
@@ -463,10 +476,17 @@ function AttractionsGuide() {
                 <p className="text-vegas-text-gray text-sm mb-4">
                   {attraction.description}
                 </p>
-                <button className="w-full py-2.5 border border-vegas-gold/50 text-vegas-gold rounded hover:bg-vegas-gold hover:text-black transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2">
-                  <Ticket className="w-4 h-4" />
-                  View Tickets
-                </button>
+                {attraction.affiliateLink ? (
+                  <a href={attraction.affiliateLink} target="_blank" rel="noopener noreferrer" className="w-full py-2.5 border border-vegas-gold/50 text-vegas-gold rounded hover:bg-vegas-gold hover:text-black transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2">
+                    <Ticket className="w-4 h-4" />
+                    Book Now
+                  </a>
+                ) : (
+                  <div className="w-full py-2.5 border border-white/20 text-white/40 rounded text-sm font-medium flex items-center justify-center gap-2">
+                    <Ticket className="w-4 h-4" />
+                    Free Admission
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -500,15 +520,15 @@ function ComparisonTable() {
   }, [])
 
   const comparisons = [
-    { name: 'Bellagio Fountains', duration: '5 min', location: 'Bellagio', price: 'Free' },
-    { name: 'High Roller', duration: '30 min', location: 'The LINQ', price: '$29-$61' },
-    { name: 'Eiffel Tower', duration: 'Flexible', location: 'Paris', price: '$25-$35' },
-    { name: 'FlyOver Vegas', duration: '30 min', location: 'Strip Center', price: '$32-$64' },
-    { name: 'Big Apple Coaster', duration: '5 min', location: 'NYNY', price: '$19-$30' },
-    { name: 'STRAT Tower', duration: 'Flexible', location: 'The STRAT', price: '$20-$130' },
-    { name: 'Madame Tussauds', duration: '1-2 hrs', location: 'Venetian', price: '$37-$51' },
-    { name: 'Shark Reef', duration: '1-2 hrs', location: 'Mandalay Bay', price: '$29-$35' },
-    { name: 'The Sphere', duration: '2+ hrs', location: 'The Sphere', price: '$79-$250' },
+    { name: 'Bellagio Fountains', duration: '5 min', location: 'Bellagio', price: 'Free', affiliateLink: '' },
+    { name: 'High Roller', duration: '30 min', location: 'The LINQ', price: '$29-$61', affiliateLink: 'https://www.viator.com/searchResults/all?text=High+Roller+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'Eiffel Tower', duration: 'Flexible', location: 'Paris', price: '$25-$35', affiliateLink: 'https://www.viator.com/searchResults/all?text=Eiffel+Tower+Viewing+Deck+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'FlyOver Vegas', duration: '30 min', location: 'Strip Center', price: '$32-$64', affiliateLink: 'https://www.viator.com/searchResults/all?text=FlyOver+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'Big Apple Coaster', duration: '5 min', location: 'NYNY', price: '$19-$30', affiliateLink: 'https://www.viator.com/searchResults/all?text=Big+Apple+Coaster+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'STRAT Tower', duration: 'Flexible', location: 'The STRAT', price: '$20-$130', affiliateLink: 'https://www.viator.com/searchResults/all?text=STRAT+Tower+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'Madame Tussauds', duration: '1-2 hrs', location: 'Venetian', price: '$37-$51', affiliateLink: 'https://www.viator.com/searchResults/all?text=Madame+Tussauds+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'Shark Reef', duration: '1-2 hrs', location: 'Mandalay Bay', price: '$29-$35', affiliateLink: 'https://www.viator.com/searchResults/all?text=Shark+Reef+Aquarium+Las+Vegas&pid=P00292126&mcid=42383&medium=link' },
+    { name: 'The Sphere', duration: '2+ hrs', location: 'The Sphere', price: '$79-$250', affiliateLink: 'https://www.getyourguide.com/las-vegas-l58/las-vegas-the-sphere-experience-the-wizard-of-oz-t969545/?partner_id=PHIGTBO&utm_medium=online_publisher' },
   ]
 
   return (
@@ -567,9 +587,13 @@ function ComparisonTable() {
                     </div>
                   </td>
                   <td className="py-4 px-4">
-                    <button className="text-sm px-4 py-2 bg-vegas-gold/10 text-vegas-gold rounded hover:bg-vegas-gold hover:text-black transition-all duration-200">
-                      View Tickets
-                    </button>
+                    {item.affiliateLink ? (
+                      <a href={item.affiliateLink} target="_blank" rel="noopener noreferrer" className="text-sm px-4 py-2 bg-vegas-gold/10 text-vegas-gold rounded hover:bg-vegas-gold hover:text-black transition-all duration-200">
+                        Book Now
+                      </a>
+                    ) : (
+                      <span className="text-sm px-4 py-2 text-white/30">Free</span>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -610,30 +634,35 @@ function TravelGuides() {
       description: 'Discover the most spectacular nighttime experiences Vegas has to offer.',
       image: '/guide-night-attractions.jpg',
       featured: true,
+      href: 'https://www.viator.com/searchResults/all?text=Las+Vegas+Strip+night+tours&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Best Free Things To Do',
       description: 'Enjoy world-class entertainment without spending a dime.',
       image: '/guide-free-things.jpg',
       featured: false,
+      href: 'https://www.viator.com/searchResults/all?text=free+Las+Vegas+Strip+tours&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Best Romantic Attractions',
       description: 'Perfect spots for couples looking for a magical Vegas experience.',
       image: '/guide-romantic.jpg',
       featured: false,
+      href: 'https://www.viator.com/searchResults/all?text=romantic+Las+Vegas+tours&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Top Thrill Rides in Las Vegas',
       description: 'Get your adrenaline pumping with these exciting attractions.',
       image: '/guide-thrill-rides.jpg',
       featured: false,
+      href: 'https://www.viator.com/searchResults/all?text=Las+Vegas+thrill+rides&pid=P00292126&mcid=42383&medium=link',
     },
     {
       title: 'Best Views of the Strip',
       description: 'The most breathtaking vantage points to see Vegas from above.',
       image: '/guide-best-views.jpg',
       featured: false,
+      href: 'https://www.viator.com/searchResults/all?text=Las+Vegas+Strip+views+helicopter&pid=P00292126&mcid=42383&medium=link',
     },
   ]
 
@@ -653,9 +682,12 @@ function TravelGuides() {
         {/* Guides Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {guides.map((guide, index) => (
-            <div
+            <a
               key={guide.title}
-              className={`group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-700 ${
+              href={guide.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-700 block ${
                 guide.featured ? 'md:col-span-2 md:row-span-2' : ''
               } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -692,7 +724,7 @@ function TravelGuides() {
                   Featured
                 </div>
               )}
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -1002,11 +1034,13 @@ function App() {
           </h2>
           <p className="text-white/60 mb-8">Compare rates and book the perfect hotel for your Vegas trip.</p>
           <iframe
-            src="https://getyourguide.stay22.com/ebss/71RKgpvzrx"
+            id="stay22-widget"
             width="100%"
-            height="500"
-            style={{ border: 'none', borderRadius: '12px' }}
+            height="428"
+            src="https://www.stay22.com/embed/69c49e04a1633b345c693765"
+            frameBorder="0"
             title="Book Hotels in Las Vegas"
+            style={{ borderRadius: '12px' }}
           />
         </div>
       </section>
